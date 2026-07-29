@@ -50,7 +50,7 @@ export class Authservice {
         try {
             return await this.account.get();
         } catch (error) {
-            console.log("No active session");
+            console.log("No active session", error);
         }
         return null;
     }
@@ -59,7 +59,7 @@ export class Authservice {
         try {
             return await this.account.deleteSessions();
         } catch (error) {
-            throw error;
+            console.log("Logout Unsuccesful", error);
         }
     }
 }
