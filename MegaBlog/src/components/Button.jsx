@@ -1,9 +1,9 @@
-import React, { Children } from 'react'
+import React from 'react'
 
 function Button({
     children,
     type = 'button',
-    bgColor = 'bg-color-600',
+    bgColor = 'bg-blue-600',
     textColor = 'text-white',
     classname = '',
     ...props
