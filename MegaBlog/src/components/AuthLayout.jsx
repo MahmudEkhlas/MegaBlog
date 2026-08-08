@@ -24,4 +24,3 @@ export default function Protected(
     }, [authStatus, navigate, authentication])
     return loader ? <h1>Loading...</h1> : <>{children}</>
 }
-// update something
