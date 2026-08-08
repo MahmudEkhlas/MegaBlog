@@ -50,14 +50,14 @@ function Header() {
               <li key={item.name}>
                 <button
                 onClick={()=> navigate(item.slug)}
-                className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
+                className='inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
                 >{item.name}</button>
               </li>
             ) : null
             )}
             {authStatus && (
               <li>
-                <LogoutBtn />
+                <Logoutbtn />
               </li>
 
             )}

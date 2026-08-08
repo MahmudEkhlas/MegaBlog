@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Link, useNavigate } from 'react-router'
 //the below import syntax is basically we are using an alias just in order we want to change the name of the function that we rae importing
-import { Login as storeLogin } from '../store/authSlice'
+import { login as storeLogin } from '../store/authSlice'
 import { Button, Input, Logo } from './index'
 import authService from '../appwrite/auth'
 import { useDispatch } from 'react-redux'
@@ -81,7 +81,7 @@ function Login() {
 
                         <Button
                             type='submit'
-                            classname='w-full'
+                            className='w-full'
                         >Sign in</Button>
                     </div>
                 </form>

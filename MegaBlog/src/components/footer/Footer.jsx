@@ -1,5 +1,5 @@
 import React from 'react'
-import { link } from 'react-router'
+import { Link } from 'react-router'
 import Logo from '../Logo'
 
 function Footer() {

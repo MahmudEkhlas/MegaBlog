@@ -22,7 +22,5 @@ export default function Protected(
         setLoader(false);
 
     }, [authStatus, navigate, authentication])
-    return (
-        <div>AuthLayout</div>
-    )
+    return loader ? <h1>Loading...</h1> : <>{children}</>
 }

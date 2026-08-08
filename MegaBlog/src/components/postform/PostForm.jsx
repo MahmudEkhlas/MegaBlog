@@ -9,13 +9,13 @@ export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post ? post.title : "",
-            slug: post ? post.slug : "",
+            slug: post ? post.$id : "",
             content: post ? post.content : "",
             status: post ? post.status : "active",
         }
     })
     const navigate = useNavigate();
-    const userData = useSelector((state) => state.user.userData)
+    const userData = useSelector((state) => state.auth.userData)
     const submit = async (data) => {
         if (post) {
             const file = data.image[0] ? await service.fileUplaod(data.image[0]) : null;
@@ -40,7 +40,7 @@ export default function PostForm({ post }) {
                 data.featuredImage = fileId;
                 const dbPost = await service.createPost({ ...data, userId: userData.$id });
                 if (dbPost) {
-
+                    navigate(`/post/${dbPost.$id}`);
                 }
             }
         }

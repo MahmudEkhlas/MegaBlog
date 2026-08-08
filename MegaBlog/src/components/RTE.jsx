@@ -11,11 +11,11 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
                 control={control}
                 render={({ field: { onChange } }) => (
                     <Editor
+                        apiKey='2yztkacxtwstdu4xn2yzh6vfvb8mkbdtsct0buyb5zmf9c89'
                         initialValue={defaultValue}
                         init={{
                             initialValue: defaultValue,
                             height: 500,
-                            menubar: true,
                             menubar: true,
                             plugins: [
                                 "image",
@@ -23,7 +23,6 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
                                 "autolink",
                                 "lists",
                                 "link",
-                                "image",
                                 "charmap",
                                 "preview",
                                 "anchor",
@@ -34,15 +33,13 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
                                 "insertdatetime",
                                 "media",
                                 "table",
-                                "code",
                                 "help",
                                 "wordcount",
-                                "anchor",
                             ],
                             toolbar:
                                 `undo redo | blocks | image |
-                                 bold italic forecolor | alignleft aligncenter bold italic forecolor | 
-                                alignleft aligncenter alignright alignjustify
+                                 alignleft aligncenter bold italic forecolor | 
+                                 alignright alignjustify
                                  | bullist numlist outdent indent |removeformat | help`,
                             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
                         }}

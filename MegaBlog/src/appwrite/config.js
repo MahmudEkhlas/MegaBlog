@@ -59,7 +59,7 @@ export class Service {
     //Deleting the post 
     async deletePost(slug) {
         try {
-            await tablesDB.deleteRow({
+            await this.tablesDB.deleteRow({
                 databaseId: conf.appwriteDatabaseId,
                 tableId: conf.appwriteTableId,
                 rowId: slug
@@ -88,7 +88,7 @@ export class Service {
     //Getting all the posts with status = Active
     async getPosts(queries = [Query.equal("status", "active")]) {
         try {
-            await tablesDB.listRows({
+            return await this.tablesDB.listRows({
                 databaseId: conf.appwriteDatabaseId,
                 tableId: conf.appwriteTableId,
                 queries: queries
