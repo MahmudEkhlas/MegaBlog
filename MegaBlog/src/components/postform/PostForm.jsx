@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form'
 import { Input, Button, Select, RTE } from '../index'
 import service from '../../appwrite/config'
 import { useNavigate } from 'react-router'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addPost, updateStorePost } from '../../store/postSlice'
 
 export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -14,11 +15,12 @@ export default function PostForm({ post }) {
             status: post ? post.status : "active",
         }
     })
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData)
     const submit = async (data) => {
         if (post) {
-            const file = data.image[0] ? await service.fileUplaod(data.image[0]) : null;
+            const file = data.image[0] ? await service.fileUpload(data.image[0]) : null;
             if (file) {
                 service.deleteFile(post.featuredImage);
             }
@@ -27,6 +29,7 @@ export default function PostForm({ post }) {
                 featuredImage: file ? file.$id : undefined
             });
             if (dbPost) {
+                dispatch(updateStorePost(dbPost));
                 navigate(`/post/${dbPost.$id}`);
             }
         }
@@ -34,12 +37,13 @@ export default function PostForm({ post }) {
             //the below line of code is the unchecked version of the written code
             //const file = await appwriteService.uploadFile(data.image[0]);
             //Study the below line is required and correct or not
-            const file = data.image[0] ? await service.fileUplaod(data.image[0]) : null;
+            const file = data.image[0] ? await service.fileUpload(data.image[0]) : null;
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
                 const dbPost = await service.createPost({ ...data, userId: userData.$id });
                 if (dbPost) {
+                    dispatch(addPost(dbPost));
                     navigate(`/post/${dbPost.$id}`);
                 }
             }

@@ -1,18 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { setPosts } from '../store/postSlice'
 import service from '../appwrite/config'
 import { Container, PostCard } from '../components'
 
 function Home() {
-    const [posts, setPosts] = useState([]);
+    const dispatch = useDispatch();
+    const posts = useSelector((state) => state.post.posts);
+    const authStatus = useSelector((state) => state.auth.status);
+
     useEffect(() => {
         service.getPosts().then((posts) => {
             if (posts) {
-                setPosts(posts.rows)
+                dispatch(setPosts(posts.rows))
             }
         })
     }, [])
 
-
+    if (authStatus === false) {
+        return (
+            <div className="w-full py-8 mt-4 text-center">
+                <Container>
+                    <div className="flex flex-wrap">
+                        <div className="p-2 w-full">
+                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                                Login to read the posts
+                            </h1>
+                        </div>
+                    </div>
+                </Container>
+            </div>
+        )
+    }
 
     if (posts.length === 0) {
         return (
@@ -21,7 +40,7 @@ function Home() {
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
                             <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
+                                No posts have been posted yet
                             </h1>
                         </div>
                     </div>
@@ -29,7 +48,7 @@ function Home() {
             </div>
         )
     }
-    
+
 
     return (
         <div className='w-full py-8'>

@@ -3,12 +3,14 @@ import { Link, useNavigate, useParams } from "react-router";
 import service from "../appwrite/config";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteStorePost } from "../store/postSlice";
 
 export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const userData = useSelector((state) => state.auth.userData);
 
@@ -27,6 +29,7 @@ export default function Post() {
         service.deletePost(post.$id).then((status) => {
             if (status) {
                 service.deleteFile(post.featuredImage);
+                dispatch(deleteStorePost(post.$id));
                 navigate("/");
             }
         });

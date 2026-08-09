@@ -1,16 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { setPosts } from '../store/postSlice'
 import service from '../appwrite/config'
 import { Container, PostCard } from '../components'
 
 function AllPosts() {
-  const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.post.posts);
   useEffect(() => {
-    service.getPosts().then((posts) => {
-      if (posts) {
-        setPosts(posts.rows)
-      }
-    })
+    if (posts.length === 0) {
+      service.getPosts().then((result) => {
+        if (result) {
+          dispatch(setPosts(result.rows))
+        }
+      })
+    }
   }, [])
+
+
+  if (posts.length === 0) {
+          return (
+              <div className="w-full py-8 mt-4 text-center">
+                  <Container>
+                      <div className="flex flex-wrap">
+                          <div className="p-2 w-full">
+                              <h1 className="text-2xl font-bold hover:text-gray-500">
+                                  No Blog has been posted
+                              </h1>
+                          </div>
+                      </div>
+                  </Container>
+              </div>
+          )
+      }
 
 
   return (
