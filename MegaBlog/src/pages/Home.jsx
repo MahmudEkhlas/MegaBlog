@@ -10,11 +10,13 @@ function Home() {
     const authStatus = useSelector((state) => state.auth.status);
 
     useEffect(() => {
-        service.getPosts().then((posts) => {
+        if(authStatus){
+            service.getPosts().then((posts) => {
             if (posts) {
                 dispatch(setPosts(posts.rows))
             }
         })
+    }
     }, [])
 
     if (authStatus === false) {
