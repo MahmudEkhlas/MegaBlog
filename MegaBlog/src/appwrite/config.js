@@ -16,7 +16,7 @@ export class Service {
     }
 
     //adding the data
-    async createPost({ title, content, slug, featuredImage, status, userId }) {
+    async createPost({ title, content, slug, featuredImage, status, userId, userName }) {
         try {
             return await this.tablesDB.createRow({
                 databaseId: conf.appwriteDatabaseId,
@@ -27,7 +27,8 @@ export class Service {
                     content,
                     featuredImage,
                     status,
-                    userId
+                    userId,
+                    userName
                 }
             });
         }

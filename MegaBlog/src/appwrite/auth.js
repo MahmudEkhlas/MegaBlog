@@ -43,6 +43,7 @@ export class Authservice {
             });
         } catch (error) {
             console.log("Login Unsuccesful", error);
+            throw error;
         }
     }
     //check Login Status

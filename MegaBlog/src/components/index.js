@@ -2,7 +2,7 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Container from "./container/Container";
 import Logoutbtn from "./header/Logoutbtn";
-import Logo from "./Logo";
+import Logo from "./logo/Logo";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
@@ -12,6 +12,8 @@ import Login from './Login'
 import PostForm from './postform/PostForm'
 import PostCard from './PostCard'
 import Protected from './AuthLayout'
+import ThemeController from './ThemeController'
+import Loading from "./Loading";
 
 export {
     Header,
@@ -27,5 +29,7 @@ export {
     Login,
     PostForm,
     PostCard,
-    Protected
+    Protected,
+    ThemeController,
+    Loading
 };

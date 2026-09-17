@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import './App.css'
 import authService from './appwrite/auth.js';
 import { login, logout } from './store/authSlice';
-import { Header, Footer } from './components/index.js';
+import { Header, Footer, ThemeController, Loading } from './components/index.js';
 import { Outlet } from 'react-router';
 
 function App() {
@@ -22,17 +22,27 @@ function App() {
       .finally(() => setLoading(false))
   }, [])
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap  content-between  bg-gray-400'>
-      <div className='w-full block text-black '>
+    <>
+      <ThemeController />
+      <div className="
+                min-h-screen flex flex-col
+                bg-[#e5e7eb] text-[#1e293b]
+                dark:bg-[#07111F] dark:text-[#e2e8f0]
+                transition-colors duration-300
+              ">
+
         <Header />
-        <main>
-          <Outlet/>
+
+        <main className="flex-1">
+          <Outlet />
         </main>
+
         <Footer />
+
       </div>
-    </div>
+    </>
   )
-    : null
+    : (<Loading />)
 }
 
 export default App

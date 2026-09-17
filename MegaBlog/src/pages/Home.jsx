@@ -10,13 +10,13 @@ function Home() {
     const authStatus = useSelector((state) => state.auth.status);
 
     useEffect(() => {
-        if(authStatus){
+        if (authStatus) {
             service.getPosts().then((posts) => {
-            if (posts) {
-                dispatch(setPosts(posts.rows))
-            }
-        })
-    }
+                if (posts) {
+                    dispatch(setPosts(posts.rows))
+                }
+            })
+        }
     }, [])
 
     if (authStatus === false) {
@@ -24,8 +24,8 @@ function Home() {
             <div className="w-full py-8 mt-4 text-center">
                 <Container>
                     <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                        <div className="p-2 w-full text-gray-900 dark:text-gray-100">
+                            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 hover:text-gray-500 dark:hover:text-gray-400">
                                 Login to read the posts
                             </h1>
                         </div>
@@ -40,8 +40,8 @@ function Home() {
             <div className="w-full py-8 mt-4 text-center">
                 <Container>
                     <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                        <div className="p-2 w-full text-gray-900 dark:text-gray-100">
+                            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 hover:text-gray-500 dark:hover:text-gray-400">
                                 No posts have been posted yet
                             </h1>
                         </div>
